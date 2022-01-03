@@ -15,19 +15,23 @@ class Map:
         webbrowser.open("map.html")
 
     def addCity(self, cityname, coords):        
-        cityname = folium.FeatureGroup()
-        cityname.add_child(
+        city = folium.FeatureGroup()
+        city.add_child(
             folium.CircleMarker(coords, radius=3, color = 'red')
         )
-        folium.Marker(coords,popup='Greenville').add_to(self.my_map)
+        folium.Marker(coords,popup=cityname).add_to(self.my_map)
+    def addMarker(self, coords):
+        folium.Marker(coords).add_to(self.my_map)
         
 
 #Define coordinates of where we want to center our map
-#coords = [51.5074, 0.1278] # London UK
+marker_coords = [51.5074, 0.1278] # London UK
 coords = (34.852619, -82.394012) 
 
-map = Map(center = coords, zoom_start = 13)
+map = Map(center = coords, zoom_start = 2)
 
-map.addCity('Greenville',coords)
+map.addCity(cityname='Greenville', coords = coords)
+
+map.addMarker(marker_coords)
 
 map.showMap()
